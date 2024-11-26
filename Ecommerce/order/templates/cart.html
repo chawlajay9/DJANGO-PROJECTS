@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load product_images_filter %}
+{% load cart_filter %}
+
+	<!-- SECTION -->
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7" style = "width: 60%; height: 600px; overflow:scroll; border: thin #000 solid; padding: 5px; margin: 20px">
+					{% for product in products %}	
+					<br>
+					<div class="container mt-5 mb-5">
+						<div class="d-flex justify-content-center row">
+							<div class="col-md-10">
+								<div class="row p-2 bg-white border rounded">
+									<div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="{{product|get_image}}"></div>
+									<div class="col-md-6 mt-1">
+										<h5>{{product.name}}</h5>
+										<div class="d-flex flex-row">
+											<div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
+										</div>
+									</div>
+									<div class="align-items-center align-content-center col-md-3 border-left mt-1">
+										<div class="d-flex flex-row align-items-center">
+											<h4 class="mr-1">${{product.price}}</h4>
+										</div>
+										<form action="cart" method="POST">
+												{% csrf_token %}
+												<input type="hidden" value="{{product.id}}" name="cartproduct">
+												<input type="hidden" value="/cartproduct" name="page">
+											<div>	
+												<button class="add-to-cart-btn" name="remove" value="True">-</button>
+												<input type="text" value="{{product.id|get_product_quantity:request.session.cart}}" size="2" readonly height="30">
+												<button class="add-to-cart-btn" name="add" value="True">+</button>
+											</div>
+										</form>
+									</div>
+								</div><br>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				<div class="col-md-5">
+					<a class="primary-btn order-submit" href="/checkout"> Buy Now</a>
+				</div>
+			</div>
+		</div>
+   </div>	
+	<!-- /SECTION -->
+		
+{% endblock %}

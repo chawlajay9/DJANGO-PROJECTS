@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+		
+<div class="container">
+	<div class="p-4 m-8 align-items-center">
+		<div class="col-lg-5 mx-auto border pt-4 rounded">
+				<!-- Billing Details -->
+				<form action="signup" method="POST">
+					{% csrf_token %}
+					{% if error %}
+					<div class="alert alert-danger" role="alert">
+					  <h4 class="alert-heading"></h4>
+					  <p>{{error}}</p>
+					</div>
+					{% endif %}
+					<div class="billing-details">
+						<div class="section-title">
+							<h3 class="title">Create An Account</h3>
+						</div>
+						<div class="form-group">
+							<input class="input" type="text" name="first_name" placeholder="First Name" required>
+						</div>
+						<div class="form-group">
+							<input class="input" type="text" name="last_name" placeholder="Last Name" required>
+						</div>
+						<div class="form-group">
+							<input class="input" type="text" name="phone" placeholder="Phone No." required>
+						</div>
+						<div class="form-group">
+							<input class="input" type="email" name="email" placeholder="Email" required>
+						</div>
+						<div class="form-group">
+							<input class="input" type="password" name="password" placeholder="Password" required>
+						</div>
+						<div class="form-group">
+							<input class="input" type="password" name="confirm_password" placeholder="Confirm Password" required>
+						</div>
+						<button class="primary-btn">Sign Up</button>
+						<a class="primary-btn " href="/login" role="button">Login</a>
+					</div>
+				</form>
+				
+				<!-- /Billing Details -->
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
